@@ -20,7 +20,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'Assets')));
 app.use(bodyParser.json());
 
-// contact scheema start
+
 const ContactSchema = new mongoose.Schema({
 name: {
 type: String,
@@ -39,9 +39,9 @@ type: String,
 require: true,
 },
 });
-// contact scheema end
+
 const Contact = mongoose.model("contact", ContactSchema);
-// new scheema start
+
 const NewAccountSchema = new mongoose.Schema({
   name: {
   type: String,
@@ -163,11 +163,9 @@ default: 1
 ],
 
 });
-// new scheema end
+
 const NewAccount = mongoose.model("new-account", NewAccountSchema);
 
-
-// user schema start
 const UserSchema = new mongoose.Schema({
 
 email: {
@@ -202,25 +200,25 @@ fs.readFile(filePath, 'utf8', (err, data) => {
   
   const updatedJson = jsonData.map(item => {
  if (item.category_img) {
-item.category_img = 'http://' + req.get('host') + item.category_img;
+item.category_img = 'https://backendjs.vercel.app/' + item.category_img;
  }
 
 if (item.pro_icon) {
-  item.pro_icon = 'http://' + req.get('host') + item.pro_icon;
+  item.pro_icon = 'https://backendjs.vercel.app/' + item.pro_icon;
  }
   
  item.pro = item.pro.map(product => {
  if (product.pro_main_img) {
- product.pro_main_img = 'http://' + req.get('host') + product.pro_main_img;
+ product.pro_main_img = 'https://backendjs.vercel.app/' + product.pro_main_img;
  }
   
  if (product.images) {
  product.images = product.images.map(a => {
  if (a.original) {
- a.original = 'http://' + req.get('host') + a.original;
+ a.original = 'https://backendjs.vercel.app/' + a.original;
  }
  if (a.thumbnail) {
- a.thumbnail = 'http://' + req.get('host') + a.thumbnail;
+ a.thumbnail = 'https://backendjs.vercel.app/' + a.thumbnail;
  }
  return a;
 
@@ -286,7 +284,7 @@ res.json({success:true,message:"Thanks for contacting"})
 
 })
 
- // backend get contact start =>
+
 app.get('/contact-info',async(req,res)=> {
 
 const contactdata = await Contact.find()
@@ -294,7 +292,7 @@ const contactdata = await Contact.find()
 res.json({data:contactdata})
   
   })
-//<= backend get contact end
+
 app.post('/new-account',async(req,res)=> {
 const{name,number,email,password}=req.body
 
@@ -356,7 +354,6 @@ res.json({data:contactdata})
     
 })
 
-// adim order
 
 app.get('/orders',async(req,res)=> {
 
@@ -753,8 +750,6 @@ app.post('/remove-from-wish', async (req, res) => {
   }
 });
 
-
-
 app.post('/save-shipping-info', async (req, res) => {
   const { name, mobile, email, address, state, pincode, landmark, city } = req.body;
 
@@ -833,8 +828,6 @@ app.get('/get-user-address', async (req, res) => {
   }
 });
 
-
-
 app.post('/save-order-info', async (req, res) => {
 
   const { orderDate } = req.body;
@@ -889,8 +882,6 @@ app.post('/save-order-info', async (req, res) => {
   }
 });
 
-
-
 app.get('/get-order-info', async (req, res) => {
   try {
     const token = req.headers.authorization?.split(' ')[1];
@@ -917,7 +908,6 @@ app.get('/get-order-info', async (req, res) => {
   }
 });
 
-
 app.get('/order-info',async(req,res)=> {
 
 const orderdata = await NewAccount.find()
@@ -925,7 +915,6 @@ const orderdata = await NewAccount.find()
 res.json({data:orderdata})
     
 })
-
 
 app.post('/newsletter',async(req,res)=> {
   const{email}=req.body
