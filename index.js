@@ -855,9 +855,9 @@ app.post('/save-order-info', async (req, res) => {
           orderDate,
           categoryid: item.categoryid,
           productid: item.productid,
-          productimg:item.img,
-          productname:item.name,
-          productprice:item.price,
+          img:item.img,
+          name:item.name,
+          price:item.price,
           size:item.size,
           quantity: item.quantity,
 
