@@ -858,7 +858,7 @@ app.post('/save-order-info', async (req, res) => {
           productimg:item.img,
           productname:item.name,
           productprice:item.price,
-
+          size:item.size,
           quantity: item.quantity,
 
         });
